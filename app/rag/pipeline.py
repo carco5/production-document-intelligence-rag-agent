@@ -1,4 +1,4 @@
-from app.generation.generator import BaselineRAGGenerator
+from app.generation.ollama_generator import OllamaRAGGenerator
 from app.rag.schemas import RAGResponse, RetrievedChunkResult
 from app.retrieval.retriever import LocalRetriever
 
@@ -6,7 +6,7 @@ from app.retrieval.retriever import LocalRetriever
 class LocalRAGPipeline:
     def __init__(self) -> None:
         self.retriever = LocalRetriever()
-        self.generator = BaselineRAGGenerator()
+        self.generator = OllamaRAGGenerator()
 
     def run(self, query: str) -> RAGResponse:
         retrieved_chunks = self.retriever.search(query=query)

@@ -8,3 +8,4 @@ langgraph
 pytest
 sentence-transformers
 numpy
+ollama
