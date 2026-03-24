@@ -1,14 +1,14 @@
 from fastapi import FastAPI
 
 from app.api.schemas import QueryRequest, QueryResponse, RetrievedChunkResponse
-from app.services.rag_service import RAGService
+from app.services.langgraph_rag_service import LangGraphRAGService
 
 app = FastAPI(
     title="Production Document Intelligence RAG Agent",
     version="0.1.0",
 )
 
-rag_service = RAGService()
+rag_service = LangGraphRAGService()
 
 
 @app.get("/health")
