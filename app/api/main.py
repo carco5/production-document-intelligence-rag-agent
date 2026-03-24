@@ -1,14 +1,14 @@
 from fastapi import FastAPI
 
 from app.api.schemas import QueryRequest, QueryResponse, RetrievedChunkResponse
-from app.rag.pipeline import LocalRAGPipeline
+from app.services.rag_service import RAGService
 
 app = FastAPI(
     title="Production Document Intelligence RAG Agent",
     version="0.1.0",
 )
 
-pipeline = LocalRAGPipeline()
+rag_service = RAGService()
 
 
 @app.get("/health")
@@ -18,7 +18,7 @@ def health() -> dict[str, str]:
 
 @app.post("/query", response_model=QueryResponse)
 def query_documents(request: QueryRequest) -> QueryResponse:
-    result = pipeline.run(query=request.query)
+    result = rag_service.query(user_query=request.query)
 
     return QueryResponse(
         query=result.query,
